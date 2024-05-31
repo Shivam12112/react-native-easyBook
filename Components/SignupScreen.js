@@ -15,8 +15,14 @@ import {
   heightPercentageToDP as hp2dp,
   widthPercentageToDP as wp2dp,
 } from 'react-native-responsive-screen';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
-function LoginScreen() {
+GoogleSignin.configure({
+  webClientId: '',
+});
+
+
+function SignupScreen() {
   const navigation = useNavigation();
   return (
     <SafeAreaView
@@ -50,13 +56,23 @@ function LoginScreen() {
             flexDirection: 'row',
           }}>
           <View style={{width: wp2dp(85)}}>
-            <Text style={{fontSize: 28, color: 'black'}}>Login</Text>
+            <Text style={{fontSize: 28, color: 'black'}}>Sign Up</Text>
             <Text>Please Signin to continue</Text>
           </View>
         </View>
         <View style={[styles.sectionContainer, {marginTop: 20}]}>
+          <TextScreen label="Name" />
           <TextScreen label="Username / Email" />
-          <TextScreen label="Password" secureTextEntry={true} />
+          <TextScreen
+            label="Password"
+            secureTextEntry={true}
+            keyboardType="password"
+          />
+          <TextScreen
+            label="Confirm Password"
+            secureTextEntry={true}
+            keyboardType="password"
+          />
         </View>
         <View style={styles.sectionContainer}>
           <View
@@ -73,7 +89,7 @@ function LoginScreen() {
               }}
               style={styles.loginButton}>
               <Text style={{fontSize: 18, color: 'white', fontWeight: '700'}}>
-                Login
+                Sign Up
               </Text>
             </TouchableOpacity>
           </View>
@@ -88,11 +104,11 @@ function LoginScreen() {
                 marginBottom: 10,
               }}>
               <Text style={{fontSize: 14, color: 'black'}}>
-                Do not have an account?{'  '}
+                Already have an account?{'  '}
                 <Text
                   style={{fontSize: 14, color: '#1581ed'}}
-                  onPress={() => navigation.navigate('SignupScreen')}>
-                  Sign Up
+                  onPress={() => navigation.navigate('LoginScreen')}>
+                  Login
                 </Text>
               </Text>
             </View>
@@ -145,4 +161,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;
